@@ -5,6 +5,7 @@ from typing import List, Optional
 from app.database import AsyncSessionLocal
 from app.services import product_service
 from app.common.enums import ProductSortField, SortOrder
+from app.models.product import ProductListResponse
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ async def get_db():
     async with AsyncSessionLocal() as db:
         yield db
 
-@router.get("/", summary="List products with pagination and filters")
+@router.get("/", summary="List products with pagination and filters", response_model=ProductListResponse)
 async def read_products(
     pageNo: int = Query(1, ge=1, description="Page number"),
     pageSize: int = Query(10, ge=1, le=100, description="Page size"),
