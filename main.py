@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes import product_routes
 from app.configs import HOST, PORT, ENV
@@ -12,6 +13,15 @@ app = FastAPI(
 
 # Global exception handler
 app.add_exception_handler(Exception, global_exception_handler) 
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(product_routes.router, prefix="/products", tags=["Products"])
 
