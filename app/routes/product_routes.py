@@ -20,8 +20,8 @@ async def read_products(
     sortField: Optional[ProductSortField] = Query(None),
     sortOrder: Optional[SortOrder] = Query(None),
     category: Optional[str] = Query(None, description="Filter by category"),
-    min_price: Optional[float] = Query(None, description="Minimum price"),
-    max_price: Optional[float] = Query(None, description="Maximum price"),
+    minPrice: Optional[float] = Query(None, description="Minimum price"),
+    maxPrice: Optional[float] = Query(None, description="Maximum price"),
     search: Optional[str] = Query(None, description="Search by title"),
     db: AsyncSession = Depends(get_db)
 ):
@@ -31,8 +31,8 @@ async def read_products(
         "sortField": sortField,
         "sortOrder": sortOrder,
         "category": category,
-        "min_price": min_price,
-        "max_price": max_price,
+        "minPrice": minPrice,
+        "maxPrice": maxPrice,
         "search": search,
     }
 
